@@ -13,9 +13,14 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
     "bulma": "^1.0.4",
+    "font-awesome": "^4.7.0",
     "node-addon-api": "^8.6.0",
     "node-gyp": "^12.2.0",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "@iconify-json/famicons": "^1.2.2"
   }
 }
