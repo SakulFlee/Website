@@ -1,8 +1,11 @@
 ---
+import BadgeEmail from "../badges/email.astro";
+import BadgeForgejo from "../badges/forgejo.astro";
+import BadgeGithub from "../badges/github.astro";
 import DownArrow from "./DownArrow.astro";
 ---
 
-<section class="hero is-dark is-fullheight-with-navbar">
+<section id="intro" class="hero is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container has-text-centered">
       <div class="column">
@@ -11,19 +14,28 @@ import DownArrow from "./DownArrow.astro";
             Hello, World!
           </h1>
           <h2 class="has-text-white subtitle">
-            I am @SakulFlee | Lukas Weber.
+            I am @SakulFlee | Lukas Weber.         
           </h2>
-          <p class="has-text-white is-family-code">
+          <p class="is-family-code">
             Software Engineer Student
+          </p>
+          <br/>
+          <p class="has-text-white is-family-code">
+            &lt;Rust Developer /&gt;
+          </p>         
+          <p class="has-text-white is-family-code">
+            &lt;Graphics Programmer /&gt;
+          </p>         
+          <p class="has-text-white is-family-code">
+            &lt;Rendering Specialist /&gt;
           </p>
         </div>
       </div>
 
       <div class="is-vcentered mt-6 pt-6">
-        <img class="pl-2 pr-2" src="https://img.shields.io/badge/Forgejo-Projects-orange?style=for-the-badge&logo=forgejo&link=https%3A%2F%2Fforgejo.sakul-flee.de%2FSakulFlee%2F" alt="Badge">
-        <img class="pl-2 pr-2" src="https://img.shields.io/badge/GitHub-Mirror-blue?style=for-the-badge&logo=github&link=https%3A%2F%2Fgithub.com%2FSakulFlee%2F" alt="Badge">
-        <img class="pl-2 pr-2" src="https://img.shields.io/badge/Contact-Mail-purple?style=for-the-badge&logo=gmail&link=mailto%3Al.weber%40sakul-flee.de" alt="Badge">
-        <img class="pl-2 pr-2" src="https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin&link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fsakulflee%2F" alt="Badge">
+        <BadgeForgejo />
+        <BadgeGithub />
+        <BadgeEmail />
       </div>
 
       <div class="is-vcentered mt-6 pt-6">
