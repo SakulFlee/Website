@@ -23,3 +23,8 @@
 #intro {
   background-image: linear-gradient(#280000, #000000);
 }
+
+.badge {
+  border-radius: 1em;
+  overflow: hidden;
+}
