@@ -3,6 +3,9 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Intro from "../components/Intro.astro";
+import AboutMe from "../components/AboutMe.astro";
+import Education from "../components/Education.astro";
+import Projects from "../components/Projects.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
@@ -13,10 +16,12 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
     </head>
     <body>
         <Header />
-        <Intro />
-        <main class="container">
-            <h1>🧑‍🚀 Hello, Astronaut!</h1>
+        <main>
+            <Intro />
+            <AboutMe />
+            <Projects />
+            <Education />
+            <Footer />
         </main>
-        <Footer />
     </body>
 </html>
