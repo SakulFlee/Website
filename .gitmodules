@@ -4,3 +4,6 @@
 [submodule "dependencies/bulma-tooltip"]
 	path = dependencies/bulma-tooltip
 	url = https://github.com/CreativeBulma/bulma-tooltip
+[submodule "hugo/themes/ananke"]
+	path = hugo/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
