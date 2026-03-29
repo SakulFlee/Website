@@ -28,3 +28,11 @@
   border-radius: 1em;
   overflow: hidden;
 }
+
+.navbar-item {
+  text-decoration: none;
+}
+
+.navbar-item.active {
+  text-decoration: underline;
+}
