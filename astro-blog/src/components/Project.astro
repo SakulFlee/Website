@@ -4,12 +4,13 @@ import type { HTMLAttributes } from "astro/types";
 interface ProjectData {
   title: string;
   subtitle: string;
+  image?: string;
   link?: string;
 }
 
 type Props = ProjectData & HTMLAttributes<"div">;
 
-const { title, subtitle, link, ...props } = Astro.props;
+const { title, subtitle, link, image, ...props } = Astro.props;
 ---
 
 <div class="column" {...props}>
@@ -17,6 +18,15 @@ const { title, subtitle, link, ...props } = Astro.props;
   <h3 class="subtitle">{subtitle}</h3>
 
   <slot />
+
+  {
+    image && (
+      <>
+        <br />
+        <img src={image} />
+      </>
+    )
+  }
 
   {
     link && (
