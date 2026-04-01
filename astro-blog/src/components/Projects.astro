@@ -88,8 +88,37 @@ import Project from "./Project.astro";
     </div>
 
     <div class="columns mt-4">
-      <Project title="Title" subtitle="Subtitle">
-        <p>Some content here ...</p>
+      <Project
+        title="Proxmox HomeLab & Multi-Node Kubernetes Cluster"
+        subtitle="Self-hosting lots of services"
+      >
+        <p>
+          I have had a server cluster already long before starting my studies.
+          Over the years the hardware, software and cluster style has changed a
+          lot. Initially, I only had a simple off-the-shelve <strong>NAS</strong
+          >, by now I am running a <strong>multi-node cluster</strong> build from
+          used but modern hardware. Each nodes runs <strong
+            >Proxmox Virtual Environment</strong
+          > in a quorum cluster configuration, with various <strong
+            >LXC Container</strong
+          > and <strong>Virtual Machines</strong>. All workloads are
+          synchronized on local storage and backed up to a <b>NAS</b>.
+        </p>
+        <br />
+        <p>
+          On-top of <strong>Proxmox</strong> I am also running a <b
+            >multi-node Kubernetes cluster</b
+          > to various <strong>OCI</strong> based workloads. Initially, the Kubernetes
+          cluster was running on <strong>Bare-Metal</strong> using <strong
+            >Longhorn</strong
+          >, <strong>MetalLB</strong>, <strong>ServiceLB</strong> and <strong
+            >CertManager</strong
+          >. However, the whole cluster was moved into <strong>Proxmox</strong> to
+          take advantage of both worlds. Some of these workloads are now also handled
+          by <strong>Proxmox</strong>, resulting in my own little <strong
+            >private cloud</strong
+          >.
+        </p>
       </Project>
       <Project title="Title" subtitle="Subtitle" link="some link here">
         <p>Some content here ...</p>
