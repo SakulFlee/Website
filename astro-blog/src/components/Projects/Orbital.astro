@@ -1,0 +1,46 @@
+---
+import Project from "../Project.astro";
+---
+
+<Project
+  pretitle="Main project"
+  title="Orbital"
+  subtitle="Cross-platform real-time graphical rendering engine"
+  link="..."
+  image="/images/projects/DamagedHelmet.png"
+>
+  <p>
+    <em>Orbital</em> is a <strong
+      >cross-platform real-time graphical rendering engine &amp; framework</strong
+    > written in <strong>Rust</strong>. The goal of this project is to bridge
+    well established <strong>industry-standard</strong> techniques with
+    <strong>upcoming (next-gen)</strong> and <strong>experimental</strong> techniques
+    to form a robust new foundation for <strong
+      >next-gen visual computing</strong
+    >. In some sense <em>Orbital</em> is a <strong
+      >2D- &amp; 3D-Game Rendering Engine</strong
+    >, but it can be used in countless more ways: from Computing to Offline
+    Rendering to normal every day Apps. While the core language is <strong>
+      Rust</strong
+    >, almost any language can be used via the <strong
+      >WebAssembly (WASM &amp; WASI)</strong
+    > programming interface. The core is build on <strong>WGPU</strong>, which
+    itself is an implementation of <strong>WebGPU</strong> and is used by modern browsers.
+    <strong>WGPU</strong> acts as a <strong>Hardware Abstraction Layer</strong> for
+    Orbital. For shading we utilize <strong>WGSL</strong>, a shading language
+    specifically designed for <strong>WebGPU</strong>.
+  </p>
+  <br />
+  <p>
+    Initially, this project was known under the name <em>Akimo</em> and originated
+    in <strong>Java</strong> as a <strong
+      >CPU-only 2D & 3D rendering framework</strong
+    >. Eventually, it moved to <strong>LWJGL3</strong> from <strong
+      >OpenGL</strong
+    > to <strong>Vulkan</strong>, then it was ported to <strong>C++</strong> with
+    <strong>Vulkan</strong> and eventually arrived at <strong>Rust</strong> with initially
+    <strong>Vulkan</strong>. Later it was renamed to <em>Orbital</em> and was switched
+    to <strong>WebGPU/WGPU</strong>. I have been working on this project for
+    years.
+  </p>
+</Project>

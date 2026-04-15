@@ -16,12 +16,8 @@ const { pretitle, title, subtitle, link, image, ...props } = Astro.props;
 
 <div class="pt-6" {...props}>
   <div>
-    {
-      pretitle && (
-        <span class="is-size-4 has-text-weight-bold">{pretitle}: </span>
-      )
-    }
-    <span class="is-size-3 has-text-white has-text-weight-bold">{title}</span>
+    {pretitle && <span class="is-size-4">{pretitle}: </span>}
+    <span class="is-size-3 has-text-white">{title}</span>
     <div class="is-size-5 p-0 m-0">{subtitle}</div>
   </div>
 

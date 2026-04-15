@@ -1,201 +1,31 @@
 ---
 import Project from "./Project.astro";
+import Orbital from "./Projects/Orbital.astro";
+import HomeLab from "./Projects/HomeLab.astro";
+import VodafoneQualitics from "./Projects/VodafoneQualitics.astro";
+import PigVocalizations from "./Projects/PigVocalizations.astro";
+import Tickify from "./Projects/Tickify.astro";
+import FluidTransport from "./Projects/FluidTransport.astro";
+import TrafficLights from "./Projects/TrafficLights.astro";
+import GeoLocation from "./Projects/GeoLocation.astro";
 ---
 
 <section id="projects" class="has-text-centered mt-4 mx-4">
   <div>
     <h1 class="title is-1">Projects</h1>
     <div class="columns mt-4">
-      <Project
-        title="Orbital"
-        subtitle="Previously: Akimo"
-        link="..."
-        image="/images/projects/DamagedHelmet.png"
-      >
-        <p>
-          <em>Orbital</em> is a <strong
-            >cross-platform real-time graphical rendering engine &amp; framework</strong
-          > written in <strong>Rust</strong>. The goal of this project is to
-          bridge well established <strong>industry-standard</strong> techniques with
-          <strong>upcoming (next-gen)</strong> and <strong>experimental</strong> techniques
-          to form a robust new foundation for <strong
-            >next-gen visual computing</strong
-          >. In some sense <em>Orbital</em> is a <strong
-            >2D- &amp; 3D-Game Rendering Engine</strong
-          >, but it can be used in countless more ways: from Computing to
-          Offline Rendering to normal every day Apps. While the core language is <strong
-          >
-            Rust</strong
-          >, almost any language can be used via the <strong
-            >WebAssembly (WASM &amp; WASI)</strong
-          > programming interface. The core is build on <strong>WGPU</strong>,
-          which itself is an implementation of <strong>WebGPU</strong> and is used
-          by modern browsers.
-          <strong>WGPU</strong> acts as a <strong
-            >Hardware Abstraction Layer</strong
-          > for Orbital. For shading we utilize <strong>WGSL</strong>, a shading
-          language specifically designed for <strong>WebGPU</strong>.
-        </p>
-        <br />
-        <p>
-          Initially, this project was known under the name <em>Akimo</em> and originated
-          in <strong>Java</strong> as a <strong
-            >CPU-only 2D & 3D rendering framework</strong
-          >. Eventually, it moved to <strong>LWJGL3</strong> from <strong
-            >OpenGL</strong
-          > to <strong>Vulkan</strong>, then it was ported to <strong
-            >C++</strong
-          > with <strong>Vulkan</strong> and eventually arrived at <strong
-            >Rust</strong
-          > with initially <strong>Vulkan</strong>. Later it was renamed to <em
-            >Orbital</em
-          > and was switched to <strong>WebGPU/WGPU</strong>. I have been
-          working on this project for years.
-        </p>
-      </Project>
-      <Project
-        title="Internship: Vodafone Qualitics"
-        subtitle="Grading: 9.8 / 10.0"
-      >
-        <p>
-          During the mandatory internship semester of my study program I
-          partnered up with Vodafone Germany. I ended up designing and
-          implementing a prototype software using <strong>Raspberry Pi</strong
-          >'s (and similar small-scale <strong>edge devices</strong>) which
-          would analyze the infamous "last meters" an ISP does not have control
-          over: From the street connection to the customer. The software would
-          be <strong>fully automatic</strong>, the customer just has to receive
-          the device and plug it into their router. Tests the device would take
-          could be easily designed. Each customer would receive a <strong
-            >specialized collection</strong
-          > of tests to be run, specifically tailored to their reported problems.
-          Enough data would be gathered and <strong
-            >automatically analyzed</strong
-          > to pinpoint issues exactly without troublesome technician appointments.
-          The software could identify any set of common home network issues, such
-          as insufficient bandwidth, network overload, spotty connections, partially
-          broken ISP lines, routing issues, interference and many more. A <strong
-            >web-interface</strong
-          > was provided for the customer and ISP to easily see what is going on and
-          what fixes are recommended. The whole stack was build using <strong
-            >Rust</strong
-          >, <strong>HTML</strong>, <strong>SASS</strong>, <strong>Figma</strong
-          >, <strong>Visual Paradigm</strong> and <strong
-            >various languages</strong
-          > for the test suites.
-        </p>
-      </Project>
-    </div>
-
-    <div class="columns mt-4">
-      <Project
-        title="Proxmox HomeLab & Multi-Node Kubernetes Cluster"
-        subtitle="Self-hosting lots of services"
-        image="/images/projects/HomeLab.drawio.png"
-        link="..."
-      >
-        <p>
-          I have had a server cluster already long before starting my studies.
-          Over the years the hardware, software and cluster style has changed a
-          lot. Initially, I only had a simple off-the-shelve <strong>NAS</strong
-          >, by now I am running a <strong>multi-node cluster</strong> build from
-          used but modern hardware. Each nodes runs <strong
-            >Proxmox Virtual Environment</strong
-          > in a quorum cluster configuration, with various <strong
-            >LXC Container</strong
-          > and <strong>Virtual Machines</strong>. All workloads are
-          synchronized on local storage and backed up to a <b>NAS</b>.
-        </p>
-        <br />
-        <p>
-          On-top of <strong>Proxmox</strong> I am also running a <b
-            >multi-node Kubernetes cluster</b
-          > for various <strong>OCI</strong> based workloads. Initially, the Kubernetes
-          cluster was running on <strong>Bare-Metal</strong> using <strong
-            >Longhorn</strong
-          >, <strong>MetalLB</strong>, <strong>ServiceLB</strong> and <strong
-            >CertManager</strong
-          >. However, the whole cluster was moved into <strong>Proxmox</strong> to
-          take advantage of both worlds. Some of these workloads are now also handled
-          by <strong>Proxmox</strong>, resulting in my own little <strong
-            >private cloud</strong
-          >. I have been using <strong>K0s</strong>, <strong>KubeAdm</strong>, <strong
-            >KubeSpray</strong
-          >, but mostly (and currently) <strong>K3s</strong>.
-        </p>
-      </Project>
-      <Project
-        title="Minor: Pig vocalization translation"
-        subtitle="Subtitle"
-        link=""
-      >
-        <p>Some content here ...</p>
-      </Project>
-    </div>
-
-    <div class="columns mt-4">
-      <Project
-        title="University Project: Tickify"
-        subtitle="Grading: Best project of the year!"
-      >
-        <p>
-          Tickify was a meant to teach us <strong>Web-Technologies</strong> like
-          <strong>HTML</strong>, <strong>CSS</strong> and <strong>PHP</strong>.
-          We specifically had to implement the project using zero client-side
-          code. The end goal was to create an Event-Ticket online shop where
-          customers could order tickets (incl. paying for them), see and manage
-          orders, and Event-Managers could create and manage their events.
-        </p>
-      </Project>
-      <Project
-        title="University Project: Fluid Transport Company"
-        subtitle="Grading: Best project of the year!"
-        link=""
-      >
-        <p>
-          This project was meant to teach us the world of <strong
-            >interconnected Business-Applications</strong
-          >. We had to make a management software for a fictional fluid
-          transport company, which had to handle everything the company might
-          need: From the drivers needing directions, employees handling orders
-          and customers entering their demands. The software even kept track of
-          the companies inventory and finances. The whole application was
-          written in <strong>Java</strong> using <strong>Spring</strong> as the backend
-          and <strong>OpenStreetMaps</strong> for navigation.
-        </p>
-      </Project>
-    </div>
-
-    <div class="columns mt-4">
-      <Project
-        title="University Project: Traffic light management software"
-        subtitle="Grading: Best project of the year!"
-      >
-        <p>
-          We had to implement a traffic light system management software, which
-          would teach us <strong>reactive programming</strong>. We started out
-          with just a single traffic light simulation, then gradually expanded
-          it to be a much more complex multi-street simulation. At the end we
-          even added some special conditions, modes, specialized traffic lights
-          and were able to keep the simulated vehicle and pedestrian traffic as
-          efficient as possible. The application was fully written in <strong
-            >Java</strong
-          >.
-        </p>
-      </Project>
-      <Project
-        title="University Project: GeoLocation"
-        subtitle="Grading: Best project of the year!"
-      >
-        <p class="has-text-align-left">
-          We took inspiration from the game "GeoGuesser" and turned it into a
-          fun interactive <strong>Android app</strong> using a <strong
-            >Cloud-Stack</strong
-          > from <strong>IBM-Cloud</strong>. Users could submit their own
-          locations with pictures for others to guess, there was a global
-          leaderboard and some smaller community tools.
-        </p>
-      </Project>
+      <left class="column">
+        <Orbital />
+        <HomeLab />
+      </left>
+      <right class="column">
+        <VodafoneQualitics />
+        <PigVocalizations />
+        <Tickify />
+        <FluidTransport />
+        <TrafficLights />
+        <GeoLocation />
+      </right>
     </div>
   </div>
 </section>

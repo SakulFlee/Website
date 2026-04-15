@@ -1,0 +1,42 @@
+---
+import Project from "../Project.astro";
+---
+
+<Project
+  pretitle="Minor project"
+  title="Pig vocalization translation"
+  subtitle="Utilizing an AI SOM to understand pig vocals"
+  link=""
+>
+  <p>
+    The goal of this minor research project was simple: Find a way to
+    "translate" pig vocalizations into human understandable pattern. We
+    partnered up with another University, a pig farmer and a company providing
+    us with <strong>microphone-array sound cameras</strong> so we could record audio
+    and video at the same time and identify which pig made these sounds. The end goal
+    was to create an app that lets the farmer know about what is going on with their
+    pigs in real-time and, if necessary, we could even alert the farmer about a ill
+    or hurt pig(let).
+  </p>
+  <br />
+  <p>
+    A pipeline was created that processed sound input files into smaller samples
+    while normalizing them using <strong>FTT</strong> (= Fast-Fourier-Transform),
+    to then run the sample data through a <strong>SOM AI model</strong> (= Self-Organizing
+    Map). As a result, we'd get a positional coordinate in the <strong
+      >SOM</strong
+    > map, which then can be compared to other known clusters. The distance to each
+    cluster results in how likely the given input is to a given cluster. The most
+    likely clusters, and their percentages, where returned. This would eventually
+    end up in a <strong>Web-App</strong> to be used by the farmer and a backend for
+    triggering certain alarms.
+  </p>
+  <br />
+  <p>
+    We ended up using <strong>Python</strong> with various packages:
+    <strong>libRosa</strong> for sound processing,
+    <strong>SomPY</strong> for the <strong>SOM</strong>,
+    <strong>Pandas</strong>, <strong>NumPY</strong>, <strong>MatPlotLib</strong> and
+    <strong>SeaBorn</strong> for visualizations.
+  </p>
+</Project>
