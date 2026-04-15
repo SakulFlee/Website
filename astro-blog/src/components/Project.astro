@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface ProjectData {
+  pretitle?: string;
   title: string;
   subtitle: string;
   image?: string;
@@ -10,12 +11,19 @@ interface ProjectData {
 
 type Props = ProjectData & HTMLAttributes<"div">;
 
-const { title, subtitle, link, image, ...props } = Astro.props;
+const { pretitle, title, subtitle, link, image, ...props } = Astro.props;
 ---
 
-<div class="column" {...props}>
-  <h2 class="title">{title}</h2>
-  <h3 class="subtitle">{subtitle}</h3>
+<div class="pt-6" {...props}>
+  <div>
+    {
+      pretitle && (
+        <span class="is-size-4 has-text-weight-bold">{pretitle}: </span>
+      )
+    }
+    <span class="is-size-3 has-text-white has-text-weight-bold">{title}</span>
+    <div class="is-size-5 p-0 m-0">{subtitle}</div>
+  </div>
 
   <slot />
 
