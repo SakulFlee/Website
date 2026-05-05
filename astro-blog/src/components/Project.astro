@@ -25,10 +25,11 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
 
   <slot />
 
+  <br />
+
   {
     image && (
       <>
-        <br />
         <img src={image} />
       </>
     )
