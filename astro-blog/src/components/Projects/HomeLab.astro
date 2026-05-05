@@ -1,5 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Project from "../Project.astro";
+
+import imageProxmox from "../../assets/Proxmox.svg";
+import imageKubernetes from "../../assets/Kubernetes.svg";
+import imageK3s from "../../assets/K3s.svg";
 ---
 
 <Project
@@ -42,7 +47,7 @@ import Project from "../Project.astro";
     <div class="column pl-6">
       <figure class="image is-128x128"> 
         <a href="https://proxmox.com/">
-          <img src="/public/images/projects/Proxmox.svg" />
+          <Image src={imageProxmox} alt="Proxmox logo"/>
         </a>
       </figure>
     </div>
@@ -50,7 +55,7 @@ import Project from "../Project.astro";
     <div class="column">
       <figure class="column image is-128x128"> 
         <a href="https://kubernetes.io/de/">
-          <img src="/public/images/projects/Kubernetes.svg" />
+          <Image src={imageKubernetes} alt="Kubernetes logo"/>
         </a>
       </figure>
     </div>
@@ -58,7 +63,7 @@ import Project from "../Project.astro";
     <div class="column pr-6">
       <figure class="column image is-128x128 pt-6">
         <a href="https://k3s.io/">
-          <img src="/public/images/projects/K3s.svg" />
+          <Image src={imageK3s} alt="K3s logo"/>
         </a>
       </figure>
     </div>

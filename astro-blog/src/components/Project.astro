@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { Image } from 'astro:assets';
 
 interface ProjectData {
   pretitle?: string;
@@ -30,7 +31,7 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
   {
     image && (
       <>
-        <img src={image} class="pb-4" />
+        <Image class="pb-4" src={image} alt="Project image for {title}" />
       </>
     )
   }
