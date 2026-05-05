@@ -9,24 +9,27 @@ jobs:
     # We tell the runner to use the Kaniko image for this specific job.
     # Forgejo will handle mounting Node into it so the 'steps' work.
     runs-on: docker
-    container:
-      image: gcr.io/kaniko-project/executor:debug
-      # We need to run as root inside the container to build the image
-      options: --user 0
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Build and Push
-        run: |
-          # 1. Create the Docker auth config
-          # $GITHUB_DATA_HOME is usually where the runner stores metadata
-          mkdir -p /kaniko/.docker
-          echo "{\"auths\":{\"${{ github.server_url }}\":{\"auth\":\"$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)\"}}}" > /kaniko/.docker/config.json
-          
-          # 2. Run the executor (it's already in the path in this image)
-          /kaniko/executor \
-            --context "${{ github.workspace }}" \
-            --dockerfile "${{ github.workspace }}/Dockerfile" \
-            --destination "${{ github.repository_owner }}/my-docker-app:latest"
+      - name: Build and Push with Kaniko Action
+        # The 'docker://' prefix tells Forgejo to run this step INSIDE that container
+        uses: docker://gcr.io/kaniko-project/executor:debug
+        with:
+          # We pass arguments directly to the entrypoint
+          args: >-
+            --context=dir://${{ github.workspace }}
+            --dockerfile=${{ github.workspace }}/Dockerfile
+            --destination=git.example.com/${{ github.repository_owner }}/my-app:latest
+        env:
+          # Kaniko looks for this env var for its config
+          CANIKO_DOCKER_CONFIG: |
+            {
+              "auths": {
+                "git.example.com": {
+                  "auth": "${{ secrets.GITHUB_TOKEN_BASE64 }}"
+                }
+              }
+            }
+
