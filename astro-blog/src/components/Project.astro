@@ -39,7 +39,7 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
     {
       forgejoLink && (
         <>
-          <a href="{forgejoLink}">
+          <a href={forgejoLink}>
             <img
               class="pl-2 pr-2 badge"
               src="https://img.shields.io/badge/Forgejo-Link%20to%20project-orange?style=for-the-badge&logo=forgejo"
@@ -53,7 +53,7 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
     {
       githubLink && (
         <>
-          <a href="{githubLink}">
+          <a href={githubLink}>
             <img
               class="pl-2 pr-2 badge"
               src="https://img.shields.io/badge/GitHub-Mirror-blue?style=for-the-badge&logo=github"
