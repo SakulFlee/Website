@@ -29,10 +29,3 @@
   overflow: hidden;
 }
 
-.navbar-item {
-  text-decoration: none;
-}
-
-.navbar-item.active {
-  text-decoration: underline;
-}
