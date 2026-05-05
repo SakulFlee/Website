@@ -6,35 +6,36 @@ import Project from "../Project.astro";
   pretitle="Side project"
   title="HomeLab"
   subtitle="Self-hosting on Proxmox, Docker and Kubernetes"
-  link="..."
+  forgejoLink="https://forgejo.sakul-flee.de/SakulFlee/HomeLab"
+  githubLink="https://github.com/SakulFlee/HomeLab"
 >
   <p>
-    I have had a server cluster already long before starting my studies. Over
-    the years the hardware, software and cluster style has changed a lot.
-    Initially, I only had a simple off-the-shelve <strong>NAS</strong>, by now I
-    am running a <strong>multi-node cluster</strong> build from used but modern hardware.
-    Each nodes runs <strong>Proxmox Virtual Environment</strong> in a quorum cluster
-    configuration, with various <strong>LXC Container</strong> and <strong
-      >Virtual Machines</strong
-    >. All workloads are synchronized on local storage and backed up to a <b
-      >NAS</b
-    >.
+    I have been operating my own server clusters already for many years at this
+    point. Over the years the hardware, software and cluster style has changed a
+    lot. Initially, I only had a simple off-the-shelve <strong>NAS</strong> and some
+    <strong>Raspberry PIs</strong>, by now I am running a <strong
+      >multi-node cluster</strong
+    > build from used but modern hardware. Each nodes runs <strong
+      >Proxmox Virtual Environment</strong
+    > in a quorum cluster configuration, with various <strong
+      >LXC Container</strong
+    > and <strong>Virtual Machines</strong>. All workloads are synchronized on
+    local storage and backed up to a <b>NAS</b>.
   </p>
   <br />
   <p>
     On-top of <strong>Proxmox</strong> I am also running a <b
       >multi-node Kubernetes cluster</b
     > for various <strong>OCI</strong> based workloads. Initially, the Kubernetes
-    cluster was running on <strong>Bare-Metal</strong> using <strong
+    cluster was running on <strong>Bare-Metal</strong> using tools like <strong
       >Longhorn</strong
     >, <strong>MetalLB</strong>, <strong>ServiceLB</strong> and <strong
       >CertManager</strong
     >. However, the whole cluster was moved into <strong>Proxmox</strong> to take
-    advantage of both worlds. Some of these workloads are now also handled by <strong
-      >Proxmox</strong
-    >, resulting in my own little <strong>private cloud</strong>. I have been
-    using <strong>K0s</strong>, <strong>KubeAdm</strong>, <strong
-      >KubeSpray</strong
-    >, but mostly (and currently) <strong>K3s</strong>.
+    advantage of both worlds resulting in my own little <strong
+      >private cloud</strong
+    >. I have been using <strong>K3s</strong> mostly, but also <strong
+      >K0s</strong
+    > and <strong>KubeAdm</strong> partially.
   </p>
 </Project>
