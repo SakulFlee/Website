@@ -16,7 +16,7 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
   Astro.props;
 ---
 
-<div class="pt-6" {...props}>
+<div class="project" {...props}>
   <div>
     {pretitle && <span class="is-size-4">{pretitle}: </span>}
     <span class="is-size-3 has-text-white">{title}</span>
@@ -65,3 +65,9 @@ const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
     }
   </div>
 </div>
+
+<style>
+.project:nth-of-type(n + 2) {
+  padding-top: 1rem;
+}
+</style>
