@@ -4,35 +4,29 @@ on:
   push:
     branches: [main]
 
-env:
-  REGISTRY: git.example.com
-  IMAGE_NAME: ${{ github.repository_owner }}/my-docker-app
-
 jobs:
   build-and-push:
+    # We tell the runner to use the Kaniko image for this specific job.
+    # Forgejo will handle mounting Node into it so the 'steps' work.
     runs-on: docker
-    
+    container:
+      image: gcr.io/kaniko-project/executor:debug
+      # We need to run as root inside the container to build the image
+      options: --user 0
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install Kaniko Binary
-        run: |
-          # Use the official Google Storage URL for the static binary
-          curl -LO https://storage.googleapis.com/kaniko-releases/latest/executor
-          chmod +x executor
-          
-          # Create Docker config for authentication
-          mkdir -p ~/.docker
-          AUTH=$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)
-          echo "{\"auths\":{\"$REGISTRY\":{\"auth\":\"$AUTH\"}}}" > ~/.docker/config.json
-
       - name: Build and Push
         run: |
-          # --no-push can be used for debugging
-          # --custom-platform is sometimes needed if the runner arch doesn't match the image
-          ./executor \
+          # 1. Create the Docker auth config
+          # $GITHUB_DATA_HOME is usually where the runner stores metadata
+          mkdir -p /kaniko/.docker
+          echo "{\"auths\":{\"${{ github.server_url }}\":{\"auth\":\"$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)\"}}}" > /kaniko/.docker/config.json
+          
+          # 2. Run the executor (it's already in the path in this image)
+          /kaniko/executor \
             --context "${{ github.workspace }}" \
             --dockerfile "${{ github.workspace }}/Dockerfile" \
-            --destination "$REGISTRY/$IMAGE_NAME:latest" \
-            --force # Required to run inside a container that isn't the official Kaniko image
+            --destination "${{ github.repository_owner }}/my-docker-app:latest"
