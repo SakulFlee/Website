@@ -11,11 +11,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Prepare Repository Name
+        run: |
+          echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
       - name: Build and Push with Kaniko
         uses: https://github.com/aevea/action-kaniko@master
         with:
           registry: forgejo.sakul-flee.de
-          image: ${{ github.repository }}
+          image: ${{ env.REPO_LOWER }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           cache: true
