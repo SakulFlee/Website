@@ -10,37 +10,41 @@ import Project from "../Project.astro";
   image="/images/projects/DamagedHelmet.png"
 >
   <p>
-    <em>Orbital</em> is a <strong
-      >cross-platform real-time graphical rendering engine &amp; framework</strong
-    > written in <strong>Rust</strong>. The goal of this project is to bridge
-    well established <strong>industry-standard</strong> techniques with
-    <strong>upcoming (next-gen)</strong> and <strong>experimental</strong> techniques
-    to form a robust new foundation for <strong
-      >next-gen visual computing</strong
-    >. In some sense <em>Orbital</em> is a <strong
-      >2D- &amp; 3D-Game Rendering Engine</strong
-    >, but it can be used in countless more ways: from Computing to Offline
-    Rendering to normal every day Apps. While the core language is <strong>
-      Rust</strong
-    >, almost any language can be used via the <strong
-      >WebAssembly (WASM &amp; WASI)</strong
-    > programming interface. The core is build on <strong>WGPU</strong>, which
-    itself is an implementation of <strong>WebGPU</strong> and is used by modern browsers.
-    <strong>WGPU</strong> acts as a <strong>Hardware Abstraction Layer</strong> for
-    Orbital. For shading we utilize <strong>WGSL</strong>, a shading language
-    specifically designed for <strong>WebGPU</strong>.
+    Orbital is a sophisticated, cross-platform real-time graphical rendering
+    engine and framework designed to provide a robust foundation for <strong
+      >next-generation visual computing</strong
+    >. It serves as a highly versatile core rendering pipeline, capable of
+    powering everything from <strong>complex 2D/3D simulations and games</strong
+    > to <strong>scientific computing visualization</strong> and <strong
+      >offline rendering</strong
+    > applications.
   </p>
   <br />
   <p>
-    Initially, this project was known under the name <em>Akimo</em> and originated
-    in <strong>Java</strong> as a <strong
-      >CPU-only 2D & 3D rendering framework</strong
-    >. Eventually, it moved to <strong>LWJGL3</strong> from <strong
+    The primary objective of Orbital is to bridge established, industry-standard
+    rendering techniques with bleeding-edge, experimental methods. The system is
+    designed with extreme portability in mind. While the core logic is in <strong
+      >Rust</strong
+    >, the rendering interface is decoupled, allowing integration via <strong
+      >WebAssembly (WASM/WASI)</strong
+    >, enabling cross-language access from almost any scripting environment.
+  </p>
+  <br />
+  <p>
+    Orbital is using <strong>WGPU / WebGPU</strong> as a HAL (= Hardware Abstraction
+    Layer) to interface with all current graphic APIs like <strong
       >OpenGL</strong
-    > to <strong>Vulkan</strong>, then it was ported to <strong>C++</strong> with
-    <strong>Vulkan</strong> and eventually arrived at <strong>Rust</strong> with initially
-    <strong>Vulkan</strong>. Later it was renamed to <em>Orbital</em> and was switched
-    to <strong>WebGPU/WGPU</strong>. I have been working on this project for
-    years.
+    >, <strong>Vulkan</strong>, <strong>DirectX 11 & 12</strong>, <strong
+      >Metal</strong
+    > and <strong>WebGPU</strong>. Additionally, <strong>WGSL</strong> is used as
+    a translation layer for shader languages for the various graphic APIs.
+  </p>
+  <br />
+  <p>
+    Orbital has a year long history and originally started under the name <em
+      >Akimo</em
+    > in <strong>Java</strong> with <strong>LWJGL</strong>, eventually moving to <strong
+      >C++</strong
+    > with <strong>Vulkan</strong>.
   </p>
 </Project>
