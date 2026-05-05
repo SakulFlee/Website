@@ -1,29 +1,51 @@
-name: Build and Push Astro Image
+name: Build and Push Docker Image
+
 on:
   push:
     branches:
-      - main
+      - main # Change this if your default branch is different
+
+env:
+  # ⚠️ Replace with your Forgejo instance's domain
+  REGISTRY: git.example.com 
+  # The image path: usually <owner>/<image-name>
+  IMAGE_NAME: ${{ github.repository_owner }}/my-docker-app
 
 jobs:
   build-and-push:
-    runs-on: docker
-    permissions:
-      contents: read
-      packages: write
+    runs-on: ubuntu-latest # This maps to your runner, launching the default 'node' image
+
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Prepare Repository Name
+      - name: Install Buildah
         run: |
-          echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+          # Detect if we need sudo, then install Buildah based on the underlying OS (Debian vs Alpine)
+          if command -v sudo &> /dev/null; then SUDO="sudo"; else SUDO=""; fi
+          
+          if command -v apt-get &> /dev/null; then
+            $SUDO apt-get update -y
+            $SUDO apt-get install -y buildah
+          elif command -v apk &> /dev/null; then
+            $SUDO apk update
+            $SUDO apk add buildah
+          else
+            echo "Unsupported package manager. Cannot install Buildah."
+            exit 1
+          fi
 
-      - name: Build and Push with Kaniko
-        uses: https://github.com/aevea/action-kaniko@master
-        with:
-          registry: forgejo.sakul-flee.de
-          image: ${{ env.REPO_LOWER }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          cache: true
-          tag_with_latest: true
+      - name: Log in to Forgejo Container Registry
+        run: |
+          # Securely authenticate using the automatically provided Action token
+          echo "${{ secrets.GITHUB_TOKEN }}" | buildah login --username "${{ github.actor }}" --password-stdin $REGISTRY
+
+      - name: Build the Docker image
+        run: |
+          # Use the 'vfs' storage driver to bypass the need for container root privileges
+          # '--format docker' ensures maximum compatibility for anyone pulling the image later
+          buildah build --storage-driver vfs --format docker -f Dockerfile -t $REGISTRY/$IMAGE_NAME:latest .
+
+      - name: Push the Docker image
+        run: |
+          buildah push --storage-driver vfs --format docker $REGISTRY/$IMAGE_NAME:latest
