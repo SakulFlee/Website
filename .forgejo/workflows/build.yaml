@@ -1,4 +1,4 @@
-name: Build and Push with Kaniko
+name: Build and Push Docker Image
 
 on:
   push:
@@ -16,28 +16,23 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Prepare Kaniko
+      - name: Install Kaniko Binary
         run: |
-          # Create the config directory for registry credentials
-          mkdir -p ~/.docker
+          # Use the official Google Storage URL for the static binary
+          curl -LO https://storage.googleapis.com/kaniko-releases/latest/executor
+          chmod +x executor
           
-          # Create the auth config using the built-in token
-          # Kaniko expects a standard Docker config.json
+          # Create Docker config for authentication
+          mkdir -p ~/.docker
           AUTH=$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)
           echo "{\"auths\":{\"$REGISTRY\":{\"auth\":\"$AUTH\"}}}" > ~/.docker/config.json
-          
-          # Download the Kaniko executor binary
-          # We use the 'debug' image version because it contains the binary we can extract
-          curl -LO https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor
-          chmod +x executor
 
-      - name: Build and Push Image
+      - name: Build and Push
         run: |
-          # --no-push can be used for testing
-          # --context is the current directory
-          # --destination is the full tag
+          # --no-push can be used for debugging
+          # --custom-platform is sometimes needed if the runner arch doesn't match the image
           ./executor \
             --context "${{ github.workspace }}" \
             --dockerfile "${{ github.workspace }}/Dockerfile" \
             --destination "$REGISTRY/$IMAGE_NAME:latest" \
-            --cache=true
+            --force # Required to run inside a container that isn't the official Kaniko image
