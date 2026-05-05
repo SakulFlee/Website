@@ -1,0 +1,45 @@
+---
+import BadgeEmail from "../../badges/email.astro";
+import BadgeForgejo from "../../badges/forgejo.astro";
+import BadgeGithub from "../../badges/github.astro";
+import DownArrow from "../DownArrow.astro";
+---
+
+<section id="intro" class="hero is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="column">
+        <div id="has-text-white">
+          <h1 class="title is-1 m-0 has-text-danger is-family-code">
+            Hello, World!
+          </h1>
+          <h2 class="title is-3 m-0">My name is</h2>
+          <h2 class="title is-3 m-0">@SakulFlee | Lukas Weber.</h2>
+          <p class="subtitle m-0 is-family-code">
+            Software Engineering Enthusiast
+          </p>
+          <br />
+          <p class="has-text-white is-family-code">&lt;Rust Developer /&gt;</p>
+          <p class="has-text-white is-family-code">
+            &lt;Graphics Programmer /&gt;
+          </p>
+          <p class="has-text-white is-family-code">
+            &lt;Rendering Specialist /&gt;
+          </p>
+        </div>
+      </div>
+
+      <div class="is-vcentered mt-6 pt-6">
+        <BadgeForgejo />
+        <BadgeGithub />
+        <BadgeEmail />
+      </div>
+
+      <div class="is-vcentered mt-6 pt-6">
+        <div class="is-vcentered mt-6 pt-6">
+          <DownArrow />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

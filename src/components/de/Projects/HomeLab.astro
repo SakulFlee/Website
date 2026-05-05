@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import Project from "../../Project.astro";
+
+import imageProxmox from "../../../assets/Proxmox.svg";
+import imageKubernetes from "../../../assets/Kubernetes.svg";
+import imageK3s from "../../../assets/K3s.svg";
+---
+
+<Project
+  pretitle="Nebenprojekt"
+  title="HomeLab"
+  subtitle="Self-Hosting auf Proxmox, Docker und Kubernetes"
+  forgejoLink="https://forgejo.sakul-flee.de/SakulFlee/HomeLab"
+  githubLink="https://github.com/SakulFlee/HomeLab"
+>
+  <p>
+    Ich betreibe nun schon seit vielen Jahren meine eigenen Server-Cluster. Im Laufe der Jahre haben sich die Hardware, die Software und der Cluster-Stil stark verändert. Ursprünglich hatte ich nur ein einfaches Standard-<strong>NAS</strong> und einige <strong>Raspberry PIs</strong>; mittlerweile betreibe ich einen <strong>Multi-Node-Cluster</strong>, der aus gebrauchter, aber moderner Hardware besteht. Jeder Knoten führt die <strong>Proxmox Virtual Environment</strong> in einer Quorum-Cluster-Konfiguration aus, mit verschiedenen <strong>LXC-Containern</strong> und <strong>virtuellen Maschinen</strong>. Alle Workloads werden auf lokalem Speicher synchronisiert und auf einem <b>NAS</b> gesichert.
+  </p>
+  <br />
+  <p>
+    Zusätzlich zu <strong>Proxmox</strong> betreibe ich auch einen <b>Multi-Node Kubernetes-Cluster</b> für verschiedene <strong>OCI</strong>-basierte Workloads. Ursprünglich lief der Kubernetes-Cluster auf <strong>Bare-Metal</strong> unter Verwendung von Tools wie <strong>Longhorn</strong>, <strong>MetalLB</strong>, <strong>ServiceLB</strong> und <strong>CertManager</strong>. Der gesamte Cluster wurde jedoch in <strong>Proxmox</strong> verschoben, um die Vorteile beider Welten zu nutzen, was zu meiner eigenen kleinen <strong>Private Cloud</strong> führte. Ich habe hauptsächlich <strong>K3s</strong> verwendet, teilweise aber auch <strong>K0s</strong> und <strong>KubeAdm</strong>.
+  </p>
+  <div class="columns pl-6 pr-6 mb-0 pb-0">
+    <div class="column pl-6">
+      <figure class="image is-128x128"> 
+        <a href="https://proxmox.com/">
+          <Image src={imageProxmox} alt="Proxmox logo"/>
+        </a>
+      </figure>
+    </div>
+  
+    <div class="column">
+      <figure class="column image is-128x128"> 
+        <a href="https://kubernetes.io/de/">
+          <Image src={imageKubernetes} alt="Kubernetes logo"/>
+        </a>
+      </figure>
+    </div>
+
+    <div class="column pr-6">
+      <figure class="column image is-128x128 pt-6">
+        <a href="https://k3s.io/">
+          <Image src={imageK3s} alt="K3s logo"/>
+        </a>
+      </figure>
+    </div>
+  </div>
+</Project>
