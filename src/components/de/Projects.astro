@@ -11,12 +11,18 @@ import VodafoneQualitics from "./Projects/VodafoneQualitics.astro";
 
 <section id="projects" class="has-text-centered">
   <h1 class="title is-1 mt-4 mb-6">Projekte</h1>
-  <Orbital />
-  <HomeLab />
-  <GeoLocation />
-  <TrafficLights />
-  <FluidTransport />
-  <Tickify />
-  <VodafoneQualitics />
-  <PigVocalizations />
+  <div class="columns m-0 p-0">
+    <left class="column">
+      <Orbital />
+      <HomeLab />
+      <Tickify />
+      <FluidTransport />
+    </left>
+    <right class="column">
+      <VodafoneQualitics />
+      <PigVocalizations />
+      <TrafficLights />
+      <GeoLocation />
+    </right>
+  </div>
 </section>

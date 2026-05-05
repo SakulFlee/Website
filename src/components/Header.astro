@@ -1,21 +1,42 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE } from "../consts";
+import { Icon } from "astro-icon/components";
 const { pathname } = Astro.url;
-const lang = pathname.startsWith('/de') ? 'de' : 'en';
+const lang = pathname.startsWith("/de") ? "de" : "en";
 ---
 
 <header>
-	<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-	  <div class="navbar-brand">
-	  	<a class="navbar-item" href="/">
-				<h2 class="is-size-5 has-text-weight-bold has-text-white">{SITE_TITLE}</h2>
+	<nav
+		class="navbar is-transparent"
+		role="navigation"
+		aria-label="main navigation"
+	>
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/">
+				<h2 class="is-size-5 has-text-weight-bold has-text-white">
+					{SITE_TITLE}
+				</h2>
 			</a>
-	  </div>
-	  <div class="navbar-end is-flex is-align-items-center pr-4">
-		<div class="buttons">
-			<a class={`button is-small ${lang === 'en' ? 'is-danger' : 'is-dark'}`} href="/en/">EN</a>
-			<a class={`button is-small ${lang === 'de' ? 'is-danger' : 'is-dark'}`} href="/de/">DE</a>
 		</div>
-	  </div>
+		<div class="navbar-end is-flex is-align-items-center pr-4">
+			<div class="buttons">
+				<a
+					class={`button is-small ${lang === "en" ? "is-danger" : "is-dark"}`}
+					href="/en/"
+				>
+					<span class="icon is-large">
+						<Icon name="emojione-v1:flag-for-united-kingdom" size="32" />
+					</span>
+				</a>
+				<a
+					class={`button is-small ${lang === "de" ? "is-danger" : "is-dark"}`}
+					href="/de/"
+				>
+					<span class="icon is-large">
+						<Icon name="emojione-v1:flag-for-germany" size="32" />
+					</span>
+				</a>
+			</div>
+		</div>
 	</nav>
 </header>
