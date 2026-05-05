@@ -6,30 +6,32 @@ on:
 
 jobs:
   build-and-push:
-    # We tell the runner to use the Kaniko image for this specific job.
-    # Forgejo will handle mounting Node into it so the 'steps' work.
     runs-on: docker
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Build and Push with Kaniko Action
-        # The 'docker://' prefix tells Forgejo to run this step INSIDE that container
-        uses: docker://gcr.io/kaniko-project/executor:debug
-        with:
-          # We pass arguments directly to the entrypoint
-          args: >-
-            --context=dir://${{ github.workspace }}
-            --dockerfile=${{ github.workspace }}/Dockerfile
-            --destination=git.example.com/${{ github.repository_owner }}/my-app:latest
-        env:
-          # Kaniko looks for this env var for its config
-          CANIKO_DOCKER_CONFIG: |
-            {
-              "auths": {
-                "git.example.com": {
-                  "auth": "${{ secrets.GITHUB_TOKEN_BASE64 }}"
-                }
-              }
-            }
+      - name: Prepare Image Name and Auth
+        shell: /busybox/sh # Kaniko uses busybox
+        run: |
+          # 1. Lowercase the repository name (e.g., SakulFlee/my-app -> sakulflee/my-app)
+          # We use 'tr' for compatibility across all shell types
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_NAME=$REPO_LOWER" >> $GITHUB_ENV
+          
+          # 2. Prepare authentication
+          mkdir -p /kaniko/.docker
+          # Forgejo often needs the protocol-less domain for the auth key
+          REGISTRY_DOMAIN=$(echo "${{ env.REGISTRY }}" | sed -e 's|^[^/]*//||' -e 's|/.*$||')
+          
+          AUTH=$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)
+          echo "{\"auths\":{\"$REGISTRY_DOMAIN\":{\"auth\":\"$AUTH\"}}}" > /kaniko/.docker/config.json
 
+      - name: Build and Push
+        run: |
+          # Now we use the $IMAGE_NAME env variable we created in the previous step
+          /kaniko/executor \
+            --context "${{ github.workspace }}" \
+            --dockerfile "${{ github.workspace }}/Dockerfile" \
+            --destination "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" \
+            --force
