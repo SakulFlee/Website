@@ -4,29 +4,46 @@ on:
   push:
     branches: [main]
 
+env:
+  REGISTRY: forgejo.sakul-flee.de
+
 jobs:
   build-and-push:
     runs-on: docker
+    
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
       - name: Prepare Image Name and Auth
-        shell: /busybox/sh # Kaniko uses busybox
+        # This runs in the NODE environment where 'bash' and 'tr' exist.
         run: |
-          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          echo "IMAGE_NAME=$REPO_LOWER" >> $GITHUB_ENV
+          # 1. Lowercase the repo name (SakulFlee/my-app -> sakulflee/my-app)
+          # Forgejo's registry requires lowercase names.
+          IMAGE_PATH=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_NAME=$IMAGE_PATH" >> $GITHUB_ENV
           
-          mkdir -p /kaniko/.docker
-          REGISTRY_DOMAIN=$(echo "${{ env.REGISTRY }}" | sed -e 's|^[^/]*//||' -e 's|/.*$||')
+          # 2. Create a docker config directory in the workspace
+          # We use the workspace because it's shared with the next step.
+          mkdir -p ${{ github.workspace }}/.docker
           
+          # 3. Generate Auth JSON
+          # We strip "https://" from the registry name for the auth key.
+          REG_HOST=$(echo "${{ env.REGISTRY }}" | sed -e 's|^[^/]*//||' -e 's|/.*$||')
           AUTH=$(echo -n "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}" | base64)
-          echo "{\"auths\":{\"$REGISTRY_DOMAIN\":{\"auth\":\"$AUTH\"}}}" > /kaniko/.docker/config.json
+          
+          echo "{\"auths\":{\"$REG_HOST\":{\"auth\":\"$AUTH\"}}}" > ${{ github.workspace }}/.docker/config.json
 
-      - name: Build and Push
-        run: |
-          /kaniko/executor \
-            --context "${{ github.workspace }}" \
-            --dockerfile "${{ github.workspace }}/Dockerfile" \
-            --destination "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest" \
+      - name: Build and Push with Kaniko
+        # This syntax tells the runner: "Pull this image and run it as a tool"
+        # It bypasses the shell path errors of the previous method.
+        uses: docker://gcr.io/kaniko-project/executor:debug
+        with:
+          args: >-
+            --context=/github/workspace
+            --dockerfile=/github/workspace/Dockerfile
+            --destination=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             --force
+        env:
+          # Tell Kaniko to look in our workspace for the login credentials
+          DOCKER_CONFIG: /github/workspace/.docker
