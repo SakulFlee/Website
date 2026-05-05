@@ -1,0 +1,74 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Image } from 'astro:assets';
+
+interface ProjectData {
+  pretitle?: string;
+  title: string;
+  subtitle: string;
+  image?: string;
+  forgejoLink?: string;
+  githubLink?: string;
+}
+
+type Props = ProjectData & HTMLAttributes<"div">;
+
+const { pretitle, title, subtitle, forgejoLink, githubLink, image, ...props } =
+  Astro.props;
+---
+
+<div class="project" {...props}>
+  <div>
+    {pretitle && <span class="is-size-4">{pretitle}: </span>}
+    <span class="is-size-3 has-text-white">{title}</span>
+    <div class="is-size-5 p-0 m-0">{subtitle}</div>
+  </div>
+
+  <slot />
+
+  <br />
+
+  {
+    image && (
+      <>
+        <Image class="pb-4" src={image} alt="Project image for {title}" />
+      </>
+    )
+  }
+
+  <div class="is-vcentered">
+    {
+      forgejoLink && (
+        <>
+          <a href={forgejoLink}>
+            <img
+              class="pl-2 pr-2 badge"
+              src="https://img.shields.io/badge/Forgejo-Link%20to%20project-orange?style=for-the-badge&logo=forgejo"
+              alt="Badge"
+            />
+          </a>
+        </>
+      )
+    }
+
+    {
+      githubLink && (
+        <>
+          <a href={githubLink}>
+            <img
+              class="pl-2 pr-2 badge"
+              src="https://img.shields.io/badge/GitHub-Mirror-blue?style=for-the-badge&logo=github"
+              alt="Badge"
+            />
+          </a>
+        </>
+      )
+    }
+  </div>
+</div>
+
+<style>
+.project:nth-of-type(n + 2) {
+  padding-top: 1rem;
+}
+</style>

@@ -1,0 +1,29 @@
+---
+import Project from "../../Project.astro";
+import orbitalImage from "../../../assets/DamagedHelmet.png";
+---
+
+<Project
+  pretitle="Hauptprojekt"
+  title="Orbital"
+  subtitle="Plattformübergreifende Echtzeit-Grafik-Rendering-Engine"
+  forgejoLink="https://forgejo.sakul-flee.de/SakulFlee/Orbital"
+  githubLink="https://github.com/SakulFlee/Orbital"
+  image={orbitalImage}
+>
+  <p>
+    Orbital ist eine anspruchsvolle, plattformübergreifende Echtzeit-Grafik-Rendering-Engine und ein Framework, das entwickelt wurde, um eine robuste Grundlage für das <strong>Visual Computing der nächsten Generation</strong> zu bieten. Es dient als äußerst vielseitige Kern-Rendering-Pipeline, die alles befeuern kann, von <strong>komplexen 2D/3D-Simulationen und Spielen</strong> bis hin zur <strong>Visualisierung von wissenschaftlichem Rechnen</strong> und <strong>Offline-Rendering</strong>-Anwendungen.
+  </p>
+  <br />
+  <p>
+    Das Hauptziel von Orbital ist es, etablierte, industriestandardmäßige Rendering-Techniken mit modernsten, experimentellen Methoden zu verbinden. Das System ist auf extreme Portabilität ausgelegt. Während die Kernlogik in <strong>Rust</strong> verfasst ist, ist die Rendering-Schnittstelle entkoppelt, was eine Integration über <strong>WebAssembly (WASM/WASI)</strong> ermöglicht und den sprachübergreifenden Zugriff von fast jeder Scripting-Umgebung aus erlaubt.
+  </p>
+  <br />
+  <p>
+    Orbital verwendet <strong>WGPU</strong> als HAL (= Hardware Abstraction Layer), um mit allen gängigen Grafik-APIs wie <strong>OpenGL</strong>, <strong>Vulkan</strong>, <strong>DirectX 11 & 12</strong>, <strong>Metal</strong> und <strong>WebGPU</strong> zu interagieren. Zusätzlich wird <strong>WGSL</strong> als Übersetzungsschicht für Shader-Sprachen für die verschiedenen Grafik-APIs verwendet.
+  </p>
+  <br />
+  <p>
+    Orbital hat eine jahrelange Geschichte und startete ursprünglich unter dem Namen <em>Akimo</em> in <strong>Java</strong> mit <strong>LWJGL</strong>, wechselte schließlich zu <strong>C++</strong> mit <strong>Vulkan</strong> und schließlich zu <strong>Rust</strong> als <em>Orbital</em>.
+  </p>
+</Project>

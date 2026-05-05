@@ -1,0 +1,28 @@
+---
+import Project from "../../Project.astro";
+import somImage from "../../../assets/SOM.png";
+---
+
+<Project
+  pretitle="Kleineres Projekt"
+  title="Übersetzung von Schweinevokalisierungen"
+  subtitle="Nutzung einer KI-SOM zum Verständnis von Schweinelauten"
+  image={somImage}
+  forgejoLink="https://forgejo.sakul-flee.de/SakulFlee/PigVocalizationSOM"
+  githubLink="https://github.com/SakulFlee/PigVocalizationSOM/"
+>
+  <p>
+    Das Ziel dieses kleineren Forschungsprojekts war einfach: Einen Weg finden, Schweinevokalisierungen in für <strong>Menschen</strong> verständliche Muster und Signale zu <em>„übersetzen“</em>. Wir haben uns mit einer anderen Universität, einem Schweinebauern und einem Unternehmen zusammengeschlossen, das uns <strong>Mikrofon-Array-Soundkameras</strong> zur Verfügung stellte, damit wir Audio und Video gleichzeitig aufnehmen und identifizieren konnten, welches Schwein diese Laute von sich gab. Das Endziel war die Erstellung einer App, die den Bauern in Echtzeit darüber informiert, was mit seinen Schweinen passiert, und ihn bei Bedarf sogar über ein krankes oder verletztes Schwein (oder Ferkel) <strong>alarmiert</strong>.
+  </p>
+  <br />
+  <p>
+    Es wurde eine Pipeline erstellt, die Audioeingangsdateien in kleinere Proben verarbeitete, sie durch MFCC (= Mel Frequency Cepstral Coefficients) laufen ließ, um Merkmale aus jeder Probe zu extrahieren, und dann ein <strong>SOM-KI-Modell</strong> (= Self-Organizing Map) auf allen extrahierten Merkmalen trainierte. Als Ergebnis erhielten wir eine Positionskoordinate in der <strong>SOM-Karte</strong>, die dann mit anderen bekannten Clustern verglichen werden kann. Die Entfernung zu jedem Cluster gibt an, wie wahrscheinlich die gegebene Eingabe zu einem bestimmten Cluster gehört. Die wahrscheinlichsten Cluster und deren Prozentsätze wurden zurückgegeben. Dies sollte schließlich in einer <strong>Web-App</strong> für den Bauern und einem Backend zur Auslösung bestimmter Alarme münden.
+  </p>
+  <br />
+  <p>
+    Wir haben letztendlich <strong>Python</strong> mit verschiedenen Paketen verwendet:
+    <strong>libRosa</strong> für die Soundverarbeitung,
+    <strong>MiniSom</strong> für die <strong>SOM</strong>,
+    <strong>Pandas</strong>, <strong>NumPY</strong> und <strong>MatPlotLib</strong>.
+  </p>
+</Project>
