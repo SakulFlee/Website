@@ -1,4 +1,4 @@
-name: Build and Push with Buildah
+name: Build and Push with Buildah (Restricted)
 
 on:
   push:
@@ -15,33 +15,30 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Prepare Lowercase Image Name
-        run: |
-          echo "IMAGE_NAME_LOWER=$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-
-      - name: Build and Push using Buildah
+      - name: Build and Push
         uses: docker://quay.io/buildah/stable:latest
+        env:
+          BUILDAH_ISOLATION: chroot
+          STORAGE_DRIVER: vfs
         with:
           entrypoint: /bin/sh
           args: |
             -c "
-            # 1. Log in to the registry
+            # Lowercase the image name
+            LOWER_IMAGE=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')
+            
+            # Login
             buildah login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
             
-            # 2. Build the image
-            # --storage-driver vfs: Avoids needing special filesystem permissions
-            # --isolation chroot: Avoids the 'unshare' syscall that failed earlier
+            # Build using specific flags to bypass namespace checks
+            # --no-pivot is often required in restricted CI environments
             buildah build \
               --storage-driver vfs \
               --isolation chroot \
               --format docker \
-              -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest .
+              --no-pivot \
+              -t ${{ env.REGISTRY }}/$LOWER_IMAGE:latest .
             
-            # 3. Push the image
-            buildah push \
-              --storage-driver vfs \
-              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest
+            # Push
+            buildah push --storage-driver vfs ${{ env.REGISTRY }}/$LOWER_IMAGE:latest
             "
-        env:
-          # This helps Buildah realize it's in a restricted environment
-          BUILDAH_ISOLATION: chroot
