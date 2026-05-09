@@ -16,7 +16,7 @@ steps:
       password:
         from_secret: FORGEJO_PASSWORD
     when:
-      event: push
+      event: [push, manual]
       branch: main
 
   publish-release:
@@ -28,4 +28,4 @@ steps:
       files:
         - dist/*
     when:
-      event: tag
+      event: [tag, manual]
