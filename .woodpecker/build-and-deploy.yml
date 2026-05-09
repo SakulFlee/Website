@@ -24,7 +24,7 @@ steps:
     commands:
       - apk add --no-cache curl jq
       - |
-        curl -X 'POST' "https://git.yourdomain.com/api/v1/repos/${CI_REPO_OWNER}/${CI_REPO_NAME}/releases" \
+        curl -X 'POST' "https://forgejo.sakul-flee.de/api/v1/repos/${CI_REPO_OWNER}/${CI_REPO_NAME}/releases" \
              -H "accept: application/json" \
              -H "Authorization: token ${FORGEJO_TOKEN}" \
              -H "Content-Type: application/json" \
