@@ -8,9 +8,8 @@ steps:
       registry: forgejo.sakul-flee.de
       repo: sakulflee/website
       tags: 
-        - latest
+        - ${CI_COMMIT_TAG:-latest}
         - ${CI_COMMIT_SHA:0:7}
-        - ${CI_COMMIT_TAG}
       dockerfile: Dockerfile
       username:
         from_secret: FORGEJO_USERNAME
