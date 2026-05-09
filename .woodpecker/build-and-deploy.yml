@@ -6,7 +6,7 @@ steps:
     image: woodpeckerci/plugin-kaniko
     settings:
       registry: forgejo.sakul-flee.de
-      repo: forgejo.sakul-flee.de/sakulflee/website
+      repo: sakulflee/website
       tags: 
         - latest
         - ${CI_COMMIT_SHA:0:7}
