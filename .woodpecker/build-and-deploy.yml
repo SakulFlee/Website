@@ -21,8 +21,6 @@ steps:
 
   create-release:
     image: alpine:latest
-    secrets:
-      - FORGEJO_PASSWORD
     commands:
       - apk add --no-cache curl jq
       - |
