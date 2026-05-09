@@ -3,7 +3,7 @@ name: build-and-deploy
 
 steps:
   build-and-push:
-    image: woodpeckerci/plugin-buildah
+    image: woodpeckerci/plugin-kaniko
     settings:
       registry: forgejo.sakul-flee.de
       repo: forgejo.sakul-flee.de/sakulflee/website
@@ -19,13 +19,22 @@ steps:
       event: [push, manual]
       branch: main
 
-  publish-release:
-    image: woodpeckerci/plugin-gitea-release
-    settings:
-      base_url: https://forgejo.sakul-flee.de
-      api_key:
-        from_secret: FORGEJO_PASSWORD
-      files:
-        - dist/*
+  create-release:
+    image: alpine:latest
+    commands:
+      - apk add --no-cache curl jq
+      - |
+        curl -X 'POST' "https://git.yourdomain.com/api/v1/repos/${CI_REPO_OWNER}/${CI_REPO_NAME}/releases" \
+             -H "accept: application/json" \
+             -H "Authorization: token ${FORGEJO_TOKEN}" \
+             -H "Content-Type: application/json" \
+             -d "{
+               \"tag_name\": \"${CI_COMMIT_TAG}\",
+               \"target_commitish\": \"${CI_COMMIT_SHA}\",
+               \"name\": \"Release ${CI_COMMIT_TAG}\",
+               \"body\": \"Automatic release from Woodpecker CI Build #${CI_PIPELINE_NUMBER}\",
+               \"draft\": false,
+               \"prerelease\": false
+             }"
     when:
-      event: [tag, manual]
+      event: tag
