@@ -1,0 +1,31 @@
+kind: pipeline
+name: build-and-deploy
+
+steps:
+  build-and-push:
+    image: woodpeckerci/plugin-buildah
+    settings:
+      registry: forgejo.sakul-flee.de
+      repo: forgejo.sakul-flee.de/sakulflee/website
+      tags: 
+        - latest
+        - ${CI_COMMIT_SHA:0:7}
+      dockerfile: Dockerfile
+      username:
+        from_secret: FORGEJO_USERNAME
+      password:
+        from_secret: FORGEJO_PASSWORD
+    when:
+      event: push
+      branch: main
+
+  publish-release:
+    image: woodpeckerci/plugin-gitea-release
+    settings:
+      base_url: https://forgejo.sakul-flee.de
+      api_key:
+        from_secret: FORGEJO_PASSWORD
+      files:
+        - dist/*
+    when:
+      event: tag
