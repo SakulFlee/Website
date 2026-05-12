@@ -1,6 +1,3 @@
-kind: pipeline
-name: build-and-deploy
-
 steps:
   build-and-push:
     image: woodpeckerci/plugin-kaniko
